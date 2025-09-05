@@ -7,7 +7,7 @@ typealias RelationshipId = String
 // ============ BUSINESS LAYER ELEMENTS ============
 
 class BusinessDomain {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -16,7 +16,7 @@ class BusinessDomain {
 }
 
 class BusinessCapability {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -26,7 +26,7 @@ class BusinessCapability {
 }
 
 class BusinessActor {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -35,7 +35,7 @@ class BusinessActor {
 }
 
 class BusinessProcess {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -47,7 +47,7 @@ class BusinessProcess {
 }
 
 class BusinessService {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -60,7 +60,7 @@ class BusinessService {
 // ============ APPLICATION LAYER ELEMENTS ============
 
 class Application {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   stereoType: "Business Application"|"IT Application"|"Platform"|"Infrastructure"|"Microsolution"
@@ -70,7 +70,7 @@ class Application {
 }
 
 class ApplicationComponent {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -80,7 +80,7 @@ class ApplicationComponent {
 }
 
 class ApplicationService {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -88,7 +88,7 @@ class ApplicationService {
 }
 
 class ApplicationInterface {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -101,7 +101,7 @@ class ApplicationInterface {
 // ============ TECHNOLOGY LAYER ELEMENTS ============
 
 class TechnologyNode {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -113,7 +113,7 @@ class TechnologyNode {
 }
 
 class TechnologyService {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -123,7 +123,7 @@ class TechnologyService {
 }
 
 class Artifact {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -134,7 +134,7 @@ class Artifact {
 }
 
 class TechnologyInterface {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -144,7 +144,7 @@ class TechnologyInterface {
 }
 
 class SystemSoftware {
-  id: ElementId
+  uid: ElementId
   name: String
   description: String?
   documentation: String?
@@ -157,7 +157,7 @@ class SystemSoftware {
 // ============ RELATIONSHIP CLASSES ============
 
 class Relationship {
-  id: RelationshipId
+  uid: RelationshipId
   description: String?
   source: AnyElement
   target: AnyElement
@@ -223,11 +223,11 @@ class LayeredViewpoint {
 // Union type for all possible elements
 typealias AnyElement = BusinessDomain|BusinessCapability|BusinessActor|BusinessProcess|BusinessService|Application|ApplicationComponent|ApplicationService|ApplicationInterface|TechnologyNode|TechnologyService|Artifact|TechnologyInterface|SystemSoftware
 
-// Union type for all possible relationships  
+// Union type for all possible relationships
 typealias AnyRelationship = Relationship
 
 class View {
-  id: String
+  uid: String
   name: String
   description: String?
   viewpoint: Viewpoint

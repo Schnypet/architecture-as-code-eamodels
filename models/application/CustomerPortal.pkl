@@ -5,7 +5,7 @@ import "../business/BusinessActors.pkl" as BA
 import "../technology/TechnologyInfrastructure.pkl" as TECH
 
 local customerPortal: Application = new {
-  id = "APP02"
+  uid = "APP02"
   description = "Self-service portal for customer interactions and account management"
   stereoType = "Business Application"
   metadata = Map("owner", "Customer Experience Team", "criticality", "Medium")
@@ -14,7 +14,7 @@ local customerPortal: Application = new {
 }
 
 local webFrontend: ApplicationComponent = new {
-  id = "COMP04"
+  uid = "COMP04"
   name = "Web Frontend"
   description = "User interface component for customer interactions"
   componentType = "Frontend"
@@ -22,7 +22,7 @@ local webFrontend: ApplicationComponent = new {
 }
 
 local authenticationModule: ApplicationComponent = new {
-  id = "COMP05"
+  uid = "COMP05"
   name = "Authentication Module"
   description = "Component handling user authentication and authorization"
   componentType = "Backend"
@@ -30,7 +30,7 @@ local authenticationModule: ApplicationComponent = new {
 }
 
 local customerDatabase: ApplicationComponent = new {
-  id = "COMP06"
+  uid = "COMP06"
   name = "Customer Database"
   description = "Database component storing customer profiles and data"
   componentType = "Database"
@@ -38,103 +38,103 @@ local customerDatabase: ApplicationComponent = new {
 }
 
 local customerWebInterface: ApplicationInterface = new {
-  id = "INTF03"
+  uid = "INTF03"
   description = "Web interface for customer self-service interactions"
   interfaceType = "UI"
   format = "HTML/CSS/JS"
 }
 
 local customerAPIInterface: ApplicationInterface = new {
-  id = "INTF04"
+  uid = "INTF04"
   description = "API interface for customer data and operations"
   interfaceType = "API"
   format = "JSON"
 }
 
 local customerAccountService: ApplicationService = new {
-  id = "SVC03"
+  uid = "SVC03"
   name = "Customer Account Service"
   description = "Service for managing customer accounts and profiles"
 }
 
 local authenticationService: ApplicationService = new {
-  id = "SVC04"
+  uid = "SVC04"
   name = "Authentication Service"
   description = "Service for user authentication and session management"
 }
 
 local appToFrontend: Relationship = new {
-  id = "REL10"
+  uid = "REL10"
   description = "Customer Portal contains Web Frontend component"
   source = customerPortal
   target = webFrontend
 }
 
 local appToAuth: Relationship = new {
-  id = "REL11"
+  uid = "REL11"
   description = "Customer Portal contains Authentication Module component"
   source = customerPortal
   target = authenticationModule
 }
 
 local appToCustomerDb: Relationship = new {
-  id = "REL12"
+  uid = "REL12"
   description = "Customer Portal contains Customer Database component"
   source = customerPortal
   target = customerDatabase
 }
 
 local frontendToWebIntf: Relationship = new {
-  id = "REL13"
+  uid = "REL13"
   description = "Web Frontend exposes Customer Web Interface"
   source = webFrontend
   target = customerWebInterface
 }
 
 local authToService: Relationship = new {
-  id = "REL14"
+  uid = "REL14"
   description = "Authentication Module exposes Authentication Service"
   source = authenticationModule
   target = authenticationService
 }
 
 local accountServiceToAPI: Relationship = new {
-  id = "REL15"
+  uid = "REL15"
   description = "Customer Account Service exposes Customer API Interface"
   source = customerAccountService
   target = customerAPIInterface
 }
 
 local frontendToAuth: Relationship = new {
-  id = "REL16"
+  uid = "REL16"
   description = "Web Frontend uses Authentication Module"
   source = webFrontend
   target = authenticationModule
 }
 
 local authToDb: Relationship = new {
-  id = "REL17"
+  uid = "REL17"
   description = "Authentication Module accesses Customer Database"
   source = authenticationModule
   target = customerDatabase
 }
 
 local frontendToAccountService: Relationship = new {
-  id = "REL18"
+  uid = "REL18"
   description = "Web Frontend uses Customer Account Service"
   source = webFrontend
   target = customerAccountService
 }
 
 local customerUsesPortal: Relationship = new {
-  id = "REL19"
+  uid = "REL19"
   description = "Customer uses Customer Portal for self-service activities"
   source = BA.customer
   target = customerPortal
 }
 
 local serviceRepUsesPortal: Relationship = new {
-  id = "REL20"
+  uid = "REL20"
   description = "Customer Service Representative uses Customer Portal to assist customers"
   source = BA.customerService
   target = customerPortal
@@ -143,35 +143,35 @@ local serviceRepUsesPortal: Relationship = new {
 // ============ TECHNOLOGY RELATIONSHIPS ============
 
 local webFrontendOnLoadBalancer: Relationship = new {
-  id = "REL30"
+  uid = "REL30"
   description = "Web Frontend deployed on Web Load Balancer"
   source = webFrontend
   target = TECH.webLoadBalancer
 }
 
 local authModuleOnAppServer: Relationship = new {
-  id = "REL31"
+  uid = "REL31"
   description = "Authentication Module deployed on Application Server"
   source = authenticationModule
   target = TECH.applicationServer
 }
 
 local customerDbOnDbServer: Relationship = new {
-  id = "REL32"
+  uid = "REL32"
   description = "Customer Database deployed on Database Server"
   source = customerDatabase
   target = TECH.databaseServer
 }
 
 local webFrontendUsesNginx: Relationship = new {
-  id = "REL33"
+  uid = "REL33"
   description = "Web Frontend uses Nginx Web Server"
   source = webFrontend
   target = TECH.nginxWebServer
 }
 
 local customerDbUsesMySQL: Relationship = new {
-  id = "REL34"
+  uid = "REL34"
   description = "Customer Database uses MySQL"
   source = customerDatabase
   target = TECH.mysqlDatabase

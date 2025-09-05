@@ -5,7 +5,7 @@ amends "../metamodel/ArchitectureMetamodel.pkl"
 // ============ TECHNOLOGY NODES ============
 
 applicationServer: TechnologyNode = new {
-  id = "TN01"
+  uid = "TN01"
   name = "Application Server"
   description = "Primary server hosting business applications"
   nodeType = "Server"
@@ -15,7 +15,7 @@ applicationServer: TechnologyNode = new {
 }
 
 databaseServer: TechnologyNode = new {
-  id = "TN02"
+  uid = "TN02"
   name = "Database Server"
   description = "Dedicated server for database workloads"
   nodeType = "Server"
@@ -25,7 +25,7 @@ databaseServer: TechnologyNode = new {
 }
 
 webLoadBalancer: TechnologyNode = new {
-  id = "TN03"
+  uid = "TN03"
   name = "Web Load Balancer"
   description = "Load balancer for web traffic distribution"
   nodeType = "Network"
@@ -36,7 +36,7 @@ webLoadBalancer: TechnologyNode = new {
 // ============ SYSTEM SOFTWARE ============
 
 javaRuntime: SystemSoftware = new {
-  id = "SW01"
+  uid = "SW01"
   name = "Java Runtime Environment"
   description = "JRE for running Java applications"
   softwareType = "Runtime"
@@ -45,7 +45,7 @@ javaRuntime: SystemSoftware = new {
 }
 
 mysqlDatabase: SystemSoftware = new {
-  id = "SW02"
+  uid = "SW02"
   name = "MySQL Database"
   description = "Relational database management system"
   softwareType = "Database"
@@ -54,7 +54,7 @@ mysqlDatabase: SystemSoftware = new {
 }
 
 postgresqlDatabase: SystemSoftware = new {
-  id = "SW03"
+  uid = "SW03"
   name = "PostgreSQL Database"
   description = "Advanced open-source relational database"
   softwareType = "Database"
@@ -63,7 +63,7 @@ postgresqlDatabase: SystemSoftware = new {
 }
 
 nginxWebServer: SystemSoftware = new {
-  id = "SW04"
+  uid = "SW04"
   name = "Nginx Web Server"
   description = "High-performance web server and reverse proxy"
   softwareType = "Middleware"
@@ -72,7 +72,7 @@ nginxWebServer: SystemSoftware = new {
 }
 
 dockerContainer: SystemSoftware = new {
-  id = "SW05"
+  uid = "SW05"
   name = "Docker Container Runtime"
   description = "Container runtime for application deployment"
   softwareType = "Runtime"
@@ -83,7 +83,7 @@ dockerContainer: SystemSoftware = new {
 // ============ TECHNOLOGY SERVICES ============
 
 computeService: TechnologyService = new {
-  id = "TS01"
+  uid = "TS01"
   name = "Compute Service"
   description = "Virtual machine compute resources"
   serviceCategory = "Compute"
@@ -91,7 +91,7 @@ computeService: TechnologyService = new {
 }
 
 storageService: TechnologyService = new {
-  id = "TS02"
+  uid = "TS02"
   name = "Storage Service"
   description = "Persistent storage for applications and data"
   serviceCategory = "Storage"
@@ -99,7 +99,7 @@ storageService: TechnologyService = new {
 }
 
 networkService: TechnologyService = new {
-  id = "TS03"
+  uid = "TS03"
   name = "Network Service"
   description = "Internal network connectivity and routing"
   serviceCategory = "Network"
@@ -107,7 +107,7 @@ networkService: TechnologyService = new {
 }
 
 monitoringService: TechnologyService = new {
-  id = "TS04"
+  uid = "TS04"
   name = "Monitoring Service"
   description = "Infrastructure and application monitoring"
   serviceCategory = "Monitoring"
@@ -117,7 +117,7 @@ monitoringService: TechnologyService = new {
 // ============ TECHNOLOGY INTERFACES ============
 
 httpInterface: TechnologyInterface = new {
-  id = "TI01"
+  uid = "TI01"
   name = "HTTP Interface"
   description = "Standard HTTP protocol interface"
   protocol = "HTTP/HTTPS"
@@ -125,7 +125,7 @@ httpInterface: TechnologyInterface = new {
 }
 
 httpsInterface: TechnologyInterface = new {
-  id = "TI02"
+  uid = "TI02"
   name = "HTTPS Interface"
   description = "Secure HTTP protocol interface"
   protocol = "HTTPS"
@@ -133,7 +133,7 @@ httpsInterface: TechnologyInterface = new {
 }
 
 mysqlInterface: TechnologyInterface = new {
-  id = "TI03"
+  uid = "TI03"
   name = "MySQL Database Interface"
   description = "MySQL database connection interface"
   protocol = "MySQL"
@@ -141,7 +141,7 @@ mysqlInterface: TechnologyInterface = new {
 }
 
 postgresInterface: TechnologyInterface = new {
-  id = "TI04"
+  uid = "TI04"
   name = "PostgreSQL Database Interface"
   description = "PostgreSQL database connection interface"
   protocol = "PostgreSQL"
@@ -151,7 +151,7 @@ postgresInterface: TechnologyInterface = new {
 // ============ ARTIFACTS ============
 
 applicationConfig: Artifact = new {
-  id = "ART01"
+  uid = "ART01"
   name = "Application Configuration"
   description = "Configuration files for applications"
   artifactType = "Configuration"
@@ -159,7 +159,7 @@ applicationConfig: Artifact = new {
 }
 
 applicationData: Artifact = new {
-  id = "ART02"
+  uid = "ART02"
   name = "Application Data"
   description = "Business data stored by applications"
   artifactType = "Data"
@@ -169,77 +169,77 @@ applicationData: Artifact = new {
 // ============ TECHNOLOGY RELATIONSHIPS ============
 
 local appServerHostsJava: Relationship = new {
-  id = "TREL01"
+  uid = "TREL01"
   description = "Application Server hosts Java Runtime"
   source = applicationServer
   target = javaRuntime
 }
 
 local dbServerHostsMySQL: Relationship = new {
-  id = "TREL02"
+  uid = "TREL02"
   description = "Database Server hosts MySQL Database"
   source = databaseServer
   target = mysqlDatabase
 }
 
 local dbServerHostsPostgreSQL: Relationship = new {
-  id = "TREL03"
+  uid = "TREL03"
   description = "Database Server hosts PostgreSQL Database"
   source = databaseServer
   target = postgresqlDatabase
 }
 
 local loadBalancerHostsNginx: Relationship = new {
-  id = "TREL04"
+  uid = "TREL04"
   description = "Load Balancer hosts Nginx Web Server"
   source = webLoadBalancer
   target = nginxWebServer
 }
 
 local appServerProvidesCompute: Relationship = new {
-  id = "TREL05"
+  uid = "TREL05"
   description = "Application Server provides Compute Service"
   source = applicationServer
   target = computeService
 }
 
 local dbServerProvidesStorage: Relationship = new {
-  id = "TREL06"
+  uid = "TREL06"
   description = "Database Server provides Storage Service"
   source = databaseServer
   target = storageService
 }
 
 local loadBalancerProvidesNetwork: Relationship = new {
-  id = "TREL07"
+  uid = "TREL07"
   description = "Load Balancer provides Network Service"
   source = webLoadBalancer
   target = networkService
 }
 
 local nginxExposesHTTP: Relationship = new {
-  id = "TREL08"
+  uid = "TREL08"
   description = "Nginx exposes HTTP Interface"
   source = nginxWebServer
   target = httpInterface
 }
 
 local nginxExposesHTTPS: Relationship = new {
-  id = "TREL09"
+  uid = "TREL09"
   description = "Nginx exposes HTTPS Interface"
   source = nginxWebServer
   target = httpsInterface
 }
 
 local mysqlExposesInterface: Relationship = new {
-  id = "TREL10"
+  uid = "TREL10"
   description = "MySQL exposes database interface"
   source = mysqlDatabase
   target = mysqlInterface
 }
 
 local postgresExposesInterface: Relationship = new {
-  id = "TREL11"
+  uid = "TREL11"
   description = "PostgreSQL exposes database interface"
   source = postgresqlDatabase
   target = postgresInterface
