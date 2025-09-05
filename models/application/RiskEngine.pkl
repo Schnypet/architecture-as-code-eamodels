@@ -1,0 +1,176 @@
+amends "../metamodel/ArchitectureMetamodel.pkl"
+import "../business/BusinessActors.pkl" as BA
+import "../technology/TechnologyInfrastructure.pkl" as TECH
+
+local riskEngine: Application = new {
+  id = "APP01"
+  description = "Core risk assessment and analysis application"
+  stereoType = "Business Application"
+  metadata = Map("owner", "Risk Management Team", "criticality", "High")
+  vendor = "Internal"
+  lifecycle = "Active"
+}
+
+local riskCalculationEngine: ApplicationComponent = new {
+  id = "COMP01"
+  name = "Risk Calculation Engine"
+  description = "Core component for risk assessment calculations"
+  componentType = "Backend"
+  technology = "Java Spring Boot"
+}
+
+local riskDataProcessor: ApplicationComponent = new {
+  id = "COMP02"
+  name = "Risk Data Processor"
+  description = "Component for processing and validating risk data inputs"
+  componentType = "Backend"
+  technology = "Apache Kafka"
+}
+
+local riskDatabase: ApplicationComponent = new {
+  id = "COMP03"
+  name = "Risk Database"
+  description = "Database component storing risk models and historical data"
+  componentType = "Database"
+  technology = "PostgreSQL"
+}
+
+local riskAssessmentAPI: ApplicationInterface = new {
+  id = "INTF01"
+  description = "REST API for risk assessment requests"
+  interfaceType = "API"
+  format = "JSON"
+}
+
+local riskReportInterface: ApplicationInterface = new {
+  id = "INTF02"
+  description = "Interface for generating and retrieving risk reports"
+  interfaceType = "API"
+  format = "PDF/JSON"
+}
+
+local riskCalculationService: ApplicationService = new {
+  id = "SVC01"
+  name = "Risk Calculation Service"
+  description = "Service for performing risk calculations and assessments"
+}
+
+local riskDataService: ApplicationService = new {
+  id = "SVC02"
+  name = "Risk Data Service"
+  description = "Service for managing risk data and models"
+}
+
+local appToCalcComp: Relationship = new {
+  id = "REL01"
+  description = "Risk Engine contains Risk Calculation Engine component"
+  source = riskEngine
+  target = riskCalculationEngine
+}
+
+local appToDataComp: Relationship = new {
+  id = "REL02"
+  description = "Risk Engine contains Risk Data Processor component"
+  source = riskEngine
+  target = riskDataProcessor
+}
+
+local appToDbComp: Relationship = new {
+  id = "REL03"
+  description = "Risk Engine contains Risk Database component"
+  source = riskEngine
+  target = riskDatabase
+}
+
+local calcCompToService: Relationship = new {
+  id = "REL04"
+  description = "Risk Calculation Engine exposes Risk Calculation Service"
+  source = riskCalculationEngine
+  target = riskCalculationService
+}
+
+local dataCompToService: Relationship = new {
+  id = "REL05"
+  description = "Risk Data Processor exposes Risk Data Service"
+  source = riskDataProcessor
+  target = riskDataService
+}
+
+local serviceToAPI: Relationship = new {
+  id = "REL06"
+  description = "Risk Calculation Service exposes Risk Assessment API"
+  source = riskCalculationService
+  target = riskAssessmentAPI
+}
+
+local serviceToReportIntf: Relationship = new {
+  id = "REL07"
+  description = "Risk Data Service exposes Risk Report Interface"
+  source = riskDataService
+  target = riskReportInterface
+}
+
+local calcToDb: Relationship = new {
+  id = "REL08"
+  description = "Risk Calculation Engine uses Risk Database"
+  source = riskCalculationEngine
+  target = riskDatabase
+}
+
+local dataToDb: Relationship = new {
+  id = "REL09"
+  description = "Risk Data Processor stores data in Risk Database"
+  source = riskDataProcessor
+  target = riskDatabase
+}
+
+local analystUsesRiskEngine: Relationship = new {
+  id = "REL10"
+  description = "Risk Analyst uses Risk Engine for assessment activities"
+  source = BA.riskAnalyst
+  target = riskEngine
+}
+
+local managerUsesRiskEngine: Relationship = new {
+  id = "REL11"
+  description = "Risk Manager uses Risk Engine for oversight and decision making"
+  source = BA.riskManager
+  target = riskEngine
+}
+
+// ============ TECHNOLOGY RELATIONSHIPS ============
+
+local calcEngineOnAppServer: Relationship = new {
+  id = "REL21"
+  description = "Risk Calculation Engine deployed on Application Server"
+  source = riskCalculationEngine
+  target = TECH.applicationServer
+}
+
+local dataProcessorOnAppServer: Relationship = new {
+  id = "REL22"
+  description = "Risk Data Processor deployed on Application Server"
+  source = riskDataProcessor
+  target = TECH.applicationServer
+}
+
+local riskDbOnDbServer: Relationship = new {
+  id = "REL23"
+  description = "Risk Database deployed on Database Server"
+  source = riskDatabase
+  target = TECH.databaseServer
+}
+
+local calcEngineUsesJava: Relationship = new {
+  id = "REL24"
+  description = "Risk Calculation Engine uses Java Runtime"
+  source = riskCalculationEngine
+  target = TECH.javaRuntime
+}
+
+local riskDbUsesPostgres: Relationship = new {
+  id = "REL25"
+  description = "Risk Database uses PostgreSQL"
+  source = riskDatabase
+  target = TECH.postgresqlDatabase
+}

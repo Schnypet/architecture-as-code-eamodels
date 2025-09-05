@@ -1,0 +1,238 @@
+module ArchitectureMetamodel
+
+// Base types for unique identification and merging
+typealias ElementId = String
+typealias RelationshipId = String
+
+// ============ BUSINESS LAYER ELEMENTS ============
+
+class BusinessDomain {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  stakeholders: Listing<ElementId>?
+}
+
+class BusinessCapability {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  level: Int? // Capability hierarchy level
+  parentCapability: ElementId?
+}
+
+class BusinessActor {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  actorType: "Internal"|"External"|"Partner"
+}
+
+class BusinessProcess {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  processType: "Core"|"Support"|"Management"
+  owner: ElementId?
+  inputs: Listing<String>?
+  outputs: Listing<String>?
+}
+
+class BusinessService {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  serviceLevel: String?
+  availability: String?
+}
+
+
+// ============ APPLICATION LAYER ELEMENTS ============
+
+class Application {
+  id: ElementId
+  name: String
+  description: String?
+  stereoType: "Business Application"|"IT Application"|"Platform"|"Infrastructure"|"Microsolution"
+  metadata: Map<String, String>?
+  vendor: String?
+  lifecycle: "Plan"|"Develop"|"Active"|"Phaseout"|"Retire"
+}
+
+class ApplicationComponent {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  componentType: "Frontend"|"Backend"|"Database"|"Integration"|"Analytics"
+  technology: String?
+}
+
+class ApplicationService {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+}
+
+class ApplicationInterface {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  interfaceType: "API"|"UI"|"File"|"Message"
+  format: String?
+}
+
+
+// ============ TECHNOLOGY LAYER ELEMENTS ============
+
+class TechnologyNode {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  nodeType: "Server"|"Network"|"Storage"|"Client"|"Cloud"
+  location: String?
+  capacity: String?
+  operatingSystem: String?
+}
+
+class TechnologyService {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  serviceCategory: "Compute"|"Storage"|"Network"|"Security"|"Monitoring"
+  provider: String?
+}
+
+class Artifact {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  artifactType: "Configuration"|"Data"|"Software"|"Physical"
+  format: String?
+  size: String?
+}
+
+class TechnologyInterface {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  protocol: String?
+  port: Int?
+}
+
+class SystemSoftware {
+  id: ElementId
+  name: String
+  description: String?
+  documentation: String?
+  properties: Map<String, String>?
+  softwareType: "OS"|"Database"|"Middleware"|"Runtime"
+  vendor: String?
+  version: String?
+}
+
+// ============ RELATIONSHIP CLASSES ============
+
+class Relationship {
+  id: RelationshipId
+  description: String?
+  source: AnyElement
+  target: AnyElement
+  properties: Map<String, String>?
+}
+
+
+// ============ VIEWPOINTS AND VIEWS ============
+
+class Viewpoint {
+  name: String
+  description: String
+  purpose: String
+  concerns: Listing<String>
+  stakeholders: Listing<String>
+  allowedElements: Listing<String>
+  allowedRelationships: Listing<String>
+}
+
+// Predefined ArchiMate Viewpoints
+class BusinessCapabilityViewpoint {
+  name: String = "Business Capability"
+  description: String = "Shows business capabilities and their relationships"
+  purpose: String = "Designing, deciding, informing"
+  concerns: Listing<String> = new Listing { "Business capabilities"; "Business alignment" }
+  stakeholders: Listing<String> = new Listing { "Business managers"; "Enterprise architects" }
+  allowedElements: Listing<String> = new Listing { "BusinessCapability"; "BusinessService"; "BusinessProcess" }
+  allowedRelationships: Listing<String> = new Listing { "Encompasses"; "Supports"; "Realizes" }
+}
+
+class ApplicationUsageViewpoint {
+  name: String = "Application Usage"
+  description: String = "Shows how applications are used to support business processes"
+  purpose: String = "Designing, deciding"
+  concerns: Listing<String> = new Listing { "Application usage"; "Business support" }
+  stakeholders: Listing<String> = new Listing { "Business users"; "Application architects" }
+  allowedElements: Listing<String> = new Listing { "BusinessProcess"; "BusinessService"; "Application"; "ApplicationService" }
+  allowedRelationships: Listing<String> = new Listing { "Uses"; "Serves"; "Realizes" }
+}
+
+class TechnologyUsageViewpoint {
+  name: String = "Technology Usage"
+  description: String = "Shows how technology supports applications and business"
+  purpose: String = "Designing, deciding"
+  concerns: Listing<String> = new Listing { "Technology usage"; "Non-functional requirements" }
+  stakeholders: Listing<String> = new Listing { "Infrastructure architects"; "Technical specialists" }
+  allowedElements: Listing<String> = new Listing { "TechnologyNode"; "TechnologyService"; "ApplicationComponent"; "Artifact" }
+  allowedRelationships: Listing<String> = new Listing { "Hosts"; "Serves"; "DeployedOn" }
+}
+
+class LayeredViewpoint {
+  name: String = "Layered"
+  description: String = "Shows the overall structure in terms of layers"
+  purpose: String = "Designing, deciding, informing"
+  concerns: Listing<String> = new Listing { "Structural overview"; "Dependencies" }
+  stakeholders: Listing<String> = new Listing { "Enterprise architects"; "Solution architects" }
+  allowedElements: Listing<String> = new Listing { "*" } // All elements allowed
+  allowedRelationships: Listing<String> = new Listing { "*" } // All relationships allowed
+}
+
+// ============ VIEW DEFINITION ============
+
+// Union type for all possible elements
+typealias AnyElement = BusinessDomain|BusinessCapability|BusinessActor|BusinessProcess|BusinessService|Application|ApplicationComponent|ApplicationService|ApplicationInterface|TechnologyNode|TechnologyService|Artifact|TechnologyInterface|SystemSoftware
+
+// Union type for all possible relationships  
+typealias AnyRelationship = Relationship
+
+class View {
+  id: String
+  name: String
+  description: String?
+  viewpoint: Viewpoint
+  elements: Map<ElementId, AnyElement>
+  relationships: Map<RelationshipId, AnyRelationship>
+  visualProperties: Map<String, Any>?
+}
+

@@ -1,0 +1,37 @@
+module BusinessActors
+amends "../metamodel/ArchitectureMetamodel.pkl"
+
+customer: BusinessActor = new {
+  id = "BA01"
+  name = "Kunde"
+  description = "Endkunde, der das Selbstbedienungsportal für die Kontoverwaltung nutzt"
+  actorType = "External"
+}
+
+loanOfficer: BusinessActor = new {
+  id = "BA02"
+  name = "Kreditberater"
+  description = "Bankberater für Kreditangelegenheiten und Finanzierungen"
+  actorType = "Internal"
+}
+
+riskAnalyst: BusinessActor = new {
+  id = "BA03"
+  name = "Risikoanalyst"
+  description = "Fachkraft für Risikobewertung und -analyse im Unternehmen"
+  actorType = "Internal"
+}
+
+riskManager: BusinessActor = new {
+  id = "BA04"
+  name = "Risikomanager"
+  description = "Führungsposition für Risikomanagement-Überwachung und Entscheidungsfindung"
+  actorType = "Internal"
+}
+
+customerService: BusinessActor = new {
+  id = "BA05"
+  name = "Kundendienstmitarbeiter"
+  description = "Interner Mitarbeiter für Kundensupport und -betreuung"
+  actorType = "Internal"
+}
