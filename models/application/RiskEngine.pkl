@@ -4,6 +4,7 @@ import "../technology/TechnologyInfrastructure.pkl" as TECH
 
 local riskEngine: Application = new {
   id = "APP01"
+  name = "Risk Engine"
   description = "Core risk assessment and analysis application"
   stereoType = "Business Application"
   metadata = Map("owner", "Risk Management Team", "criticality", "High")

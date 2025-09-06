@@ -6,6 +6,7 @@ import "../technology/TechnologyInfrastructure.pkl" as TECH
 
 local customerPortal: Application = new {
   uid = "APP02"
+  name = "Customer Portal"
   description = "Self-service portal for customer interactions and account management"
   stereoType = "Business Application"
   metadata = Map("owner", "Customer Experience Team", "criticality", "Medium")
